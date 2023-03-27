@@ -31,7 +31,7 @@ export const items = [
   },
    {
     title: 'Organization',
-    path: '/discover',
+    path: '/dao/test.sputnikv2.testnet',
     icon: (
       <SvgIcon fontSize="small">
         <UserIcon />
