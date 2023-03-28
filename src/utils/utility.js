@@ -22,7 +22,7 @@ export const convertDuration = (duration) => {
 
 export const getUserAvatarId = (userId) => {
   let num = '';
-  for (let i = 0; i < userId.length; i++) {
+  for (let i = 0; i < userId.length;  i += 1) {
     num += userId.charCodeAt(i);
   }
   return parseInt(num) % 100;
