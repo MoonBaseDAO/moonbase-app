@@ -1,7 +1,7 @@
 # moonbase.app
 
-[![CI](https://github.com/MoonBaseDAO/moonbase-app/actions/workflows/node.js.yml/badge.svg)](https://github.com/MoonBaseDAO/moonbase-app/actions/workflows/node.js.yml)]
-[![CD](https://vercelbadge.vercel.app/api/moonbasedao/moonbase-app)]
+![CI](https://github.com/MoonBaseDAO/moonbase-app/actions/workflows/node.js.yml/badge.svg)](https://github.com/MoonBaseDAO/moonbase-app/actions/workflows/node.js.yml)
+![CD](https://vercelbadge.vercel.app/api/moonbasedao/moonbase-app)
 
 It's as easy as 1-2-3 & Done.
 
