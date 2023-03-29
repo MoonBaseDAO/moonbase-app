@@ -1,7 +1,5 @@
 import * as nearApi from 'near-api-js';
-import { Account } from "near-api-js";
 import { useEffect, useState } from "react";
-import { wallet } from "src/near/near";
 import { nearConfig, yoktoNear } from "src/utils/utility";
 
 const provider = new nearApi.providers.JsonRpcProvider(nearConfig.nodeUrl);

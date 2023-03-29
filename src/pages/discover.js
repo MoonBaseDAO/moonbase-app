@@ -18,6 +18,7 @@ const DiscoverPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const fetchDaoList = async (start, limit) => {
+    console.log("Discover", factoryContract);
     setLoading(true);
     const list = await factoryContract?.get_daos({ from_index: start, limit: limit });
     const count = await factoryContract?.get_number_daos();

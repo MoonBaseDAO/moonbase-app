@@ -1,8 +1,11 @@
+import { useWalletSelector } from '@/contexts/wallet-selector-context';
+import { AccountProfileDetails } from '@/sections/account/account-profile-details';
+import { BOATLOAD_OF_GAS } from '@/utils/utility';
 import { Dialog, Transition } from '@headlessui/react';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import { utils } from 'near-api-js';
 import { Fragment, useRef } from 'react';
 import { useNear } from 'src/hooks/use-near';
-import { yoktoNear } from 'src/utils/utility';
 
 export const CouncilModalType = {
   ADD: 1,
@@ -11,47 +14,40 @@ export const CouncilModalType = {
 
 export const CouncilProposalModal = ({ addr, proposalBond, open, setOpen, councilType = CouncilModalType.ADD }) => {
   const cancelButtonRef = useRef(null)
+  const { selector, accountId, signAndSendTransaction } = useWalletSelector();
   const { getDaoContract } = useNear();
   const councilRef = useRef(null);
   const descRef = useRef(null);
 
   const hanldeAddProposal = async () => {
-    const contract = getDaoContract(addr);
     const council = councilRef.current.value;
     const description = descRef.current.value;
-    console.log(proposalBond.toString());
-    if(councilType == CouncilModalType.ADD) {
-      await contract.add_proposal(
-        {
-          proposal: {
-            description: description.trim(),
-            kind: {
-              AddMemberToRole: {
-                member_id: council,
-                role: 'council'
-              }
+    if (councilType == CouncilModalType.ADD) {
+      const args = {
+        proposal: {
+          description: description.trim(),
+          kind: {
+            AddMemberToRole: {
+              member_id: council,
+              role: 'council'
             }
           }
-        },
-        BigInt('30000000000000').toString(),
-        proposalBond.toString()
-      );
+        }
+      };
+      await signAndSendTransaction(addr, "add_proposal", args, proposalBond)
     } else {
-      await contract.add_proposal(
-        {
-          proposal: {
-            description: description.trim(),
-            kind: {
-              RemoveMemberFromRole: {
-                member_id: council,
-                role: 'council'
-              }
+      const args = {
+        proposal: {
+          description: description.trim(),
+          kind: {
+            RemoveMemberFromRole: {
+              member_id: council,
+              role: 'council'
             }
           }
-        },
-        BigInt('30000000000000').toString(),
-        proposalBond.toString()
-      );
+        }
+      }
+      await signAndSendTransaction(addr, "add_proposal", args, proposalBond);
     }
   }
 
@@ -115,7 +111,7 @@ export const CouncilProposalModal = ({ addr, proposalBond, open, setOpen, counci
                         <div className='mt-2'>
                           <div className='bg-blue-100 text-blue-800 rounded-lg px-2 py-1 w-full text-center'>
                             You will pay a deposit of <span className="text-base">Ⓝ</span>
-                            {(proposalBond / yoktoNear).toFixed(2)}{' '}
+                            {utils.format.formatNearAmount(proposalBond, 2)} {' '}
                             to add this proposal!
                           </div>
                         </div>
