@@ -7,7 +7,7 @@ import { setupModal } from "@near-wallet-selector/modal-ui";
 import { setupNarwallets } from "@near-wallet-selector/narwallets";
 import { setupNearSnap } from "@near-wallet-selector/near-snap";
 import { setupNearWallet } from "@near-wallet-selector/near-wallet";
-import { setupNearFi } from "@near-wallet-selector/nearfi";
+import { setupNearFi } from "@near-wallet-selector/nearfi"; 
 import { setupNightly } from "@near-wallet-selector/nightly";
 import { setupNightlyConnect } from "@near-wallet-selector/nightly-connect";
 import { setupSender } from "@near-wallet-selector/sender";
@@ -25,6 +25,7 @@ import { setupNeth } from "@near-wallet-selector/neth";
 import { setupOptoWallet } from "@near-wallet-selector/opto-wallet";
 import { Loading } from "src/components/loading";
 import "@near-wallet-selector/modal-ui/styles.css";
+import { BOATLOAD_OF_GAS } from "@/utils/utility";
 
 const nearConfig = getConfig(process.env.NODE_ENV || 'development');
 
@@ -126,6 +127,25 @@ export const WalletSelectorContextProvider = ({ children }) => {
     };
   }, [selector]);
 
+  const signAndSendTransaction = useCallback(async (receiver, methodName, args, amount) => {
+    const wallet = await selector.wallet();
+    await wallet.signAndSendTransaction({
+      signer: accountId,
+      receiverId: receiver,
+      actions: [
+        {
+          type: "FunctionCall",
+          params: {
+            methodName: methodName,
+            args: args,
+            gas: BOATLOAD_OF_GAS,
+            deposit: amount,
+          },
+        },
+      ],
+    });
+  }, [selector])
+
   if (!selector || !modal) {
     return <Loading />;
   }
@@ -140,6 +160,7 @@ export const WalletSelectorContextProvider = ({ children }) => {
         modal,
         accounts,
         accountId,
+        signAndSendTransaction
       }}
     >
       {children}

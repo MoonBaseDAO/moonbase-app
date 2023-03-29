@@ -1,4 +1,7 @@
+import { utils } from "near-api-js";
 import { getConfig } from "src/config/near";
+
+export const BOATLOAD_OF_GAS = utils.format.parseNearAmount("0.00000000003");
 
 export const yoktoNear = 1000000000000000000000000;
 export const nearConfig = getConfig(process.env.NODE_ENV || 'development');

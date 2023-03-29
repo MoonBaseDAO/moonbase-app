@@ -1,12 +1,13 @@
 import { useWalletSelector } from "@/contexts/wallet-selector-context";
-import { Contract } from "near-api-js";
+import { ConnectedWalletAccount, Connection, Contract, utils, Near, WalletConnection, keyStores, providers, InMemorySigner } from "near-api-js";
 import { useEffect, useState } from "react";
 import { getConfig } from "src/config/near";
+import { WALLET } from "src/near/wallet";
 
 const nearConfig = getConfig(process.env.NODE_ENV || 'development');
 
 export const useNear = () => {
-  const { accountId, accounts } = useWalletSelector();
+  const { selector, accountId, accounts } = useWalletSelector();
   const [factoryContract, setFactoryContract] = useState(null);
 
   useEffect(() => {
@@ -15,13 +16,28 @@ export const useNear = () => {
     }
   }, [accountId]);
 
+  const getAccount = () => {
+    const keyStore = new keyStores.BrowserLocalStorageKeyStore()
+    const near = new Near({
+      networkId: WALLET.NETWORK_ID,
+      keyStore: keyStore,
+      nodeUrl: WALLET.NODE_URL,
+      walletUrl: WALLET.WALLET_URL,
+    });
+
+    const walletConnection = new WalletConnection(near, "MoonBase");
+    const provider = new providers.JsonRpcProvider(nearConfig.nodeUrl);
+    const signer = new InMemorySigner(keyStore);
+    const connection = new Connection(nearConfig.nodeUrl, provider, signer);
+    const account = new ConnectedWalletAccount(walletConnection, connection, accountId);
+    return account;
+  }
+
   const initContracts = async () => {
     if (!accountId) return;
-
-    console.log(accounts[0])
-
+    const account = getAccount();
     const contract = await new Contract(
-      accounts[0],
+      account,
       nearConfig.contractName,
       {
         viewMethods: ['get_dao_list', 'get_number_daos', 'get_daos'],
@@ -33,9 +49,9 @@ export const useNear = () => {
   }
 
   const getDaoContract = (addr) => {
-    if (accountId) return;
-
-    const daoContract = new Contract(accounts[0], addr, {
+    if (!accountId) return;
+    const account = getAccount();
+    const daoContract = new Contract(account, addr, {
       viewMethods: [
         'get_config',
         'get_policy',
