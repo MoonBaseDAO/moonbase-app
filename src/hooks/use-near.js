@@ -1,33 +1,27 @@
-import { getConfig } from "src/config/near";
-import { initSDK, signIn, signOut, wallet } from "src/near/near";
+import { useWalletSelector } from "@/contexts/wallet-selector-context";
 import { Contract } from "near-api-js";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { getConfig } from "src/config/near";
 
 const nearConfig = getConfig(process.env.NODE_ENV || 'development');
 
 export const useNear = () => {
-  const router = useRouter();
-  const [isPending, setPending] = useState(false);
-  const [isConnected, setConnected] = useState(false);
-  const [accountId, setAccountId] = useState(null);
+  const { accountId, accounts } = useWalletSelector();
   const [factoryContract, setFactoryContract] = useState(null);
-  const [daoContract, setDaoContract] = useState(null);
 
   useEffect(() => {
-    initSDK();
-    if (wallet?.getAccountId()) {
-      setConnected(true);
-      setAccountId(wallet?.getAccountId());
+    if (accountId) {
       initContracts();
     }
-  }, []);
+  }, [accountId]);
 
   const initContracts = async () => {
-    if (!wallet?.getAccountId) return;
+    if (!accountId) return;
+
+    console.log(accounts[0])
 
     const contract = await new Contract(
-      wallet?.account(),
+      accounts[0],
       nearConfig.contractName,
       {
         viewMethods: ['get_dao_list', 'get_number_daos', 'get_daos'],
@@ -39,9 +33,9 @@ export const useNear = () => {
   }
 
   const getDaoContract = (addr) => {
-    if (!wallet?.getAccountId) return;
+    if (accountId) return;
 
-    const daoContract = new Contract(wallet?.account(), addr, {
+    const daoContract = new Contract(accounts[0], addr, {
       viewMethods: [
         'get_config',
         'get_policy',
@@ -64,24 +58,5 @@ export const useNear = () => {
     return daoContract;
   }
 
-  const connectWithNear = async () => {
-    if (isConnected) {
-      await signOut();
-      setConnected(false);
-      setAccountId(null);
-      router.replace('/');
-    }
-    else {
-      await signIn();
-      setPending(true);
-    }
-  }
-
-  const handleConnect = (key) => {
-    const keyString = key;
-    if (keyString == "Near")
-      connectWithNear();
-  }
-
-  return { factoryContract, isConnected, isPending, accountId, handleConnect, getDaoContract };
+  return { factoryContract, getDaoContract };
 }
