@@ -1,33 +1,43 @@
-import { getConfig } from "src/config/near";
-import { initSDK, signIn, signOut, wallet } from "src/near/near";
-import { Contract } from "near-api-js";
-import { useRouter } from "next/router";
+import { useWalletSelector } from "@/contexts/wallet-selector-context";
+import { ConnectedWalletAccount, Connection, Contract, utils, Near, WalletConnection, keyStores, providers, InMemorySigner } from "near-api-js";
 import { useEffect, useState } from "react";
+import { getConfig } from "src/config/near";
+import { WALLET } from "src/near/wallet";
 
 const nearConfig = getConfig(process.env.NODE_ENV || 'development');
 
 export const useNear = () => {
-  const router = useRouter();
-  const [isPending, setPending] = useState(false);
-  const [isConnected, setConnected] = useState(false);
-  const [accountId, setAccountId] = useState(null);
+  const { selector, accountId, accounts } = useWalletSelector();
   const [factoryContract, setFactoryContract] = useState(null);
-  const [daoContract, setDaoContract] = useState(null);
 
   useEffect(() => {
-    initSDK();
-    if (wallet?.getAccountId()) {
-      setConnected(true);
-      setAccountId(wallet?.getAccountId());
+    if (accountId) {
       initContracts();
     }
-  }, []);
+  }, [accountId]);
+
+  const getAccount = () => {
+    const keyStore = new keyStores.BrowserLocalStorageKeyStore()
+    const near = new Near({
+      networkId: WALLET.NETWORK_ID,
+      keyStore: keyStore,
+      nodeUrl: WALLET.NODE_URL,
+      walletUrl: WALLET.WALLET_URL,
+    });
+
+    const walletConnection = new WalletConnection(near, "MoonBase");
+    const provider = new providers.JsonRpcProvider(nearConfig.nodeUrl);
+    const signer = new InMemorySigner(keyStore);
+    const connection = new Connection(nearConfig.nodeUrl, provider, signer);
+    const account = new ConnectedWalletAccount(walletConnection, connection, accountId);
+    return account;
+  }
 
   const initContracts = async () => {
-    if (!wallet?.getAccountId) return;
-
+    if (!accountId) return;
+    const account = getAccount();
     const contract = await new Contract(
-      wallet?.account(),
+      account,
       nearConfig.contractName,
       {
         viewMethods: ['get_dao_list', 'get_number_daos', 'get_daos'],
@@ -39,9 +49,9 @@ export const useNear = () => {
   }
 
   const getDaoContract = (addr) => {
-    if (!wallet?.getAccountId) return;
-
-    const daoContract = new Contract(wallet?.account(), addr, {
+    if (!accountId) return;
+    const account = getAccount();
+    const daoContract = new Contract(account, addr, {
       viewMethods: [
         'get_config',
         'get_policy',
@@ -64,24 +74,5 @@ export const useNear = () => {
     return daoContract;
   }
 
-  const connectWithNear = async () => {
-    if (isConnected) {
-      await signOut();
-      setConnected(false);
-      setAccountId(null);
-      router.replace('/');
-    }
-    else {
-      await signIn();
-      setPending(true);
-    }
-  }
-
-  const handleConnect = (key) => {
-    const keyString = key;
-    if (keyString == "Near")
-      connectWithNear();
-  }
-
-  return { factoryContract, isConnected, isPending, accountId, handleConnect, getDaoContract };
+  return { factoryContract, getDaoContract };
 }

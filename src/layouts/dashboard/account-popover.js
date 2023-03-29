@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 import { useAuth } from 'src/hooks/use-auth';
 import { useNear } from 'src/hooks/use-near';
+import { useWalletSelector } from '@/contexts/wallet-selector-context';
 
 export const AccountPopover = (props) => {
+  const { modal, accountId } = useWalletSelector();
   const { anchorEl, onClose, open } = props;
   const router = useRouter();
   const auth = useAuth();
-  const { isConnected, accountId, handleConnect } = useNear();
-  
+
   const handleConnectNear = () => {
-    handleConnect('Near');
+    modal.show();
   }
 
   const handleSignOut = useCallback(
@@ -63,7 +64,7 @@ export const AccountPopover = (props) => {
         }}
       >
         <MenuItem onClick={handleConnectNear}>
-          {isConnected ? accountId : 'Ⓝ Connect'}
+          {accountId ? accountId : 'Ⓝ Connect'}
         </MenuItem>
         <MenuItem onClick={handleSignOut}>
           Sign out

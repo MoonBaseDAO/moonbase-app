@@ -42,6 +42,7 @@ const DaoDetailPage = () => {
   const getInfos = async () => {
     if (!addr || daoConfig != null) return;
     const contract = getDaoContract(addr);
+    if(!contract) return;
     const config = await contract.get_config();
     const proposals = await contract.get_proposals({ from_index: 0, limit: 100 });
     const policy = await contract.get_policy();
