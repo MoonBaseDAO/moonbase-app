@@ -3,8 +3,8 @@ import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 import { useAuth } from 'src/hooks/use-auth';
-import { useWalletSelector } from '@/contexts/wallet-selector-context';
-import { useWeb3Auth } from '@/contexts/web3auth-context';
+import { useWalletSelector } from 'src/contexts/wallet-selector-context';
+import { useWeb3Auth } from 'src/contexts/web3auth-context';
 
 export const AccountPopover = (props) => {
   const { login } = useWeb3Auth();
