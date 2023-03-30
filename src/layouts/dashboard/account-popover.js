@@ -24,6 +24,28 @@ export const AccountPopover = (props) => {
     },
     [onClose, auth, router]
   );
+  
+  const handleConnectWebAuth = () => {
+  // Use Web3Auth to authenticate the user
+  web3Auth
+    .login()
+    .then(() => {
+      setIsLoggedIn(true);
+    })
+    .catch((error) => {
+      console.error("Error logging in with Web3Auth:", error);
+    });
+}
+
+  
+  const handle = useCallback(
+    () => {
+      onClose?.();
+      auth.signOut();
+      router.push('/auth/login');
+    },
+    [onClose, auth, router]
+  );
 
   return (
     <Popover
@@ -65,6 +87,9 @@ export const AccountPopover = (props) => {
       >
         <MenuItem onClick={handleConnectNear}>
           {accountId ? accountId : 'Ⓝ Connect'}
+        </MenuItem>
+        <MenuItem onClick={handleConnectWebAuth}>
+          Connect with Web3Auth
         </MenuItem>
         <MenuItem onClick={handleSignOut}>
           Sign out
