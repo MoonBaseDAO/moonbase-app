@@ -3,12 +3,11 @@ import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 import { useAuth } from 'src/hooks/use-auth';
-import { useNear } from 'src/hooks/use-near';
 import { useWalletSelector } from '@/contexts/wallet-selector-context';
-import { web3Auth } from '@/hooks/use-web3auth';
-
+import { useWeb3Auth } from '@/contexts/web3auth-context';
 
 export const AccountPopover = (props) => {
+  const { login } = useWeb3Auth();
   const { modal, accountId } = useWalletSelector();
   const { anchorEl, onClose, open } = props;
   const router = useRouter();
@@ -27,19 +26,10 @@ export const AccountPopover = (props) => {
     [onClose, auth, router]
   );
   
-  const handleConnectWebAuth = () => {
-  // Use Web3Auth to authenticate the user
-  web3Auth
-    .login()
-    .then(() => {
-      setIsLoggedIn(true);
-    })
-    .catch((error) => {
-      console.error("Error logging in with Web3Auth:", error);
-    });
-}
+  const handleConnectWeb3Auth = () => {
+    login();
+  }
 
-  
   const handle = useCallback(
     () => {
       onClose?.();
@@ -90,7 +80,7 @@ export const AccountPopover = (props) => {
         <MenuItem onClick={handleConnectNear}>
           {accountId ? accountId : 'Ⓝ Connect'}
         </MenuItem>
-        <MenuItem onClick={handleConnectWebAuth}>
+        <MenuItem onClick={handleConnectWeb3Auth}>
           Connect with Web3Auth
         </MenuItem>
         <MenuItem onClick={handleSignOut}>
