@@ -5,6 +5,8 @@ import { useCallback } from 'react';
 import { useAuth } from 'src/hooks/use-auth';
 import { useNear } from 'src/hooks/use-near';
 import { useWalletSelector } from '@/contexts/wallet-selector-context';
+import { web3Auth } from '@/hooks/use-web3auth';
+
 
 export const AccountPopover = (props) => {
   const { modal, accountId } = useWalletSelector();
