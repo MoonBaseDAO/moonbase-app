@@ -28,4 +28,5 @@ jobs:
         cache: 'npm'
     - run: npm install yarn 
     - run: yarn install
+    - run: npm i @solana/web3.js
     - run: yarn build
