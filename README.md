@@ -41,6 +41,7 @@ todo - find logos/images for the wares we built this on top of...
 8) - [x] zodiac[^8]
 9) - [x] near-api-js[^9]
 10) - [x] ethers[^10]
+<img src="https://moralis.io/wp-content/uploads/2022/12/ethers.js-1-1024x708.png" width="20%" height="20%">
 11) - [x] web3[^11] 
 <img src="https://docs.web3js.org/img/web3js.svg"  width="20%" height="20%">
 12) - [ ] your warez?
