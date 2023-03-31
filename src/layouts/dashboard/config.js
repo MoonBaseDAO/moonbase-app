@@ -9,7 +9,10 @@ import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import XCircleIcon from '@heroicons/react/24/solid/XCircleIcon';
 import ChatBubbleBottomCenterIcon from '@heroicons/react/24/solid/ChatBubbleBottomCenterIcon';
 import { SvgIcon } from '@mui/material';
+import { IntroJs } from 'intro.js';
+import 'intro.js/introjs.css';
 
+export const intro = IntroJs();
 export const items = [
    {
     title: 'Discover',
