@@ -67,7 +67,7 @@ export const Web3AuthProvider = ({ children, web3AuthNetwork, chain }) => {
     async function init() {
       try {
         setIsLoading(true);
-        const clientId = "BKPxkCtfC9gZ5dj-eg-W6yb5Xfr3XkxHuGZl2o2Bn8gKQ7UYike9Dh6c-_LaXlUN77x0cBoPwcSx-IVm0llVsLA";
+        const clientId = "BBogXvWFN6c1aHFAZ-vbTPbdb_7UbePNJtiB5cXwFE-jmarjr-hOhlv0TvtiBtbZ-ESCpRT_tdXOfrCpsHTUuwI";
         const web3AuthInstance = new Web3Auth({
           chainConfig: currentChainConfig,
           // get your client id from https://dashboard.web3auth.io
