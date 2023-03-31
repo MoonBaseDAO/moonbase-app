@@ -7,7 +7,6 @@ import { setupModal } from "@near-wallet-selector/modal-ui";
 import { setupNarwallets } from "@near-wallet-selector/narwallets";
 import { setupNearSnap } from "@near-wallet-selector/near-snap";
 import { setupNearWallet } from "@near-wallet-selector/near-wallet";
-import { setupNearFi } from "@near-wallet-selector/nearfi"; 
 import { setupNightly } from "@near-wallet-selector/nightly";
 import { setupNightlyConnect } from "@near-wallet-selector/nightly-connect";
 import { setupSender } from "@near-wallet-selector/sender";
@@ -48,7 +47,6 @@ export const WalletSelectorContextProvider = ({ children }) => {
         setupMathWallet(),
         setupNightly(),
         setupMeteorWallet(),
-        setupNearFiWallet(),
         setupNearSnap(),
         setupNarwallets(),
         setupWelldoneWallet(),
