@@ -26,3 +26,34 @@ yarn start
 Then, the app is ready at http://localhost:3000
 
 ![image](https://media.discordapp.net/attachments/1047007258237743165/1087957535371296788/image.png)
+
+technologies used in our app:
+:::info
+todo - find logos/images for the wares we built this on top of...
+:::
+1) - [x] next.js
+2) - [x] mui
+3) - [x] tailwind
+4) - [x] wallet selector
+5) - [x] web3auth
+6) - [x] safe-sdk core
+7) - [x] stripe api
+8) - [x] zodiac
+9) - [x] near-api-js
+10) - [x] ethers
+11) - [x] web3
+12) - [ ] your warez?
+as this list continues to grow..
+
+1 - https://nextjs.org/docs/getting-started
+2 - https://mui.com/material-ui/getting-started/overview/
+3 - https://v2.tailwindcss.com/docs
+4 - https://docs.near.org/tools/wallet-selector
+5 - https://web3auth.io/docs/
+6 - https://docs.safe.global/learn/safe-core/safe-core-account-abstraction-sdk/protocol-kit/core-sdk
+7 - https://stripe.com/docs/api
+8 - https://zodiac.wiki/index.php/Introduction:_Zodiac_Standard
+9 - https://docs.near.org/tools/near-api-js/quick-reference
+10 - https://docs.ethers.org/v5/
+11 - https://docs.web3js.org/
+12 - ???
