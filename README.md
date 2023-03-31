@@ -31,11 +31,11 @@ technologies used in our app:
 :::info
 todo - find logos/images for the wares we built this on top of...
 :::
-1) - [x] next.js[^1]
+1) next.js[^1]
 <img src="https://w7.pngwing.com/pngs/906/753/png-transparent-nextjs-illustration-thumbnail.png" width="20%" height="20%">
-2) - [x] mui[^2]
+2) mui[^2]
 <img src="https://mui.com/static/blog/material-ui-is-now-mui/card.png" width="205" height="20%">
-3) - [x] tailwind[^3]
+3) tailwind[^3]
 <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-ar21.png width="20%" height="20%">
 4) - [x] wallet selector[^4]
 <img src="https://opengraph.githubassets.com/a358a216b8cb55096611d658ea1ccb6a097393b7d11c66b26ff2965967325fd0/near/wallet-selector" width="20%" height="20%">
@@ -56,9 +56,9 @@ todo - find logos/images for the wares we built this on top of...
 12) - [ ] your warez?
 as this list continues to grow..
 
-[^1]: https://nextjs.org/docs/getting-started
-[^2]: https://mui.com/material-ui/getting-started/overview/
-[^3]: https://v2.tailwindcss.com/docs
+[^1]:https://nextjs.org/docs/getting-started
+[^2]:https://mui.com/material-ui/getting-started/overview/
+[^3]:https://v2.tailwindcss.com/docs
 [^4]: https://docs.near.org/tools/wallet-selector
 [^5]: https://web3auth.io/docs/
 [^6]: https://docs.safe.global/learn/safe-core/safe-core-account-abstraction-sdk/protocol-kit/core-sdk
