@@ -22,7 +22,6 @@ import { setupFinerWallet } from "@near-wallet-selector/finer-wallet";
 import { setupLedger } from "@near-wallet-selector/ledger";
 import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
 import { setupNeth } from "@near-wallet-selector/neth";
-import { setupNearFi } from "@near-wallet-selector/nearfi";
 import { setupOptoWallet } from "@near-wallet-selector/opto-wallet";
 import { Loading } from "src/components/loading";
 import "@near-wallet-selector/modal-ui/styles.css";
@@ -49,6 +48,7 @@ export const WalletSelectorContextProvider = ({ children }) => {
         setupMathWallet(),
         setupNightly(),
         setupMeteorWallet(),
+        setupNearFiWallet(),
         setupNearSnap(),
         setupNarwallets(),
         setupWelldoneWallet(),
