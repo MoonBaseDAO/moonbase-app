@@ -40,7 +40,7 @@ const App = (props) => {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <AuthProvider>
           <WalletSelectorContextProvider>
-            <Web3AuthProvider chain="mainnet" web3AuthNetwork="mainnet">
+            <Web3AuthProvider chain="mainnet" web3AuthNetwork="testnet">
               <ThemeProvider theme={theme}>
                 <CssBaseline />
                 <AuthConsumer>
