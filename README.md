@@ -57,23 +57,13 @@ todo - find logos/images for the wares we built this on top of...
 as this list continues to grow..
 
 [^1]: https://nextjs.org/docs/getting-started
-
 [^2]: https://mui.com/material-ui/getting-started/overview/
-
 [^3]: https://v2.tailwindcss.com/docs
-
 [^4]: https://docs.near.org/tools/wallet-selector
-
 [^5]: https://web3auth.io/docs/
-
 [^6]: https://docs.safe.global/learn/safe-core/safe-core-account-abstraction-sdk/protocol-kit/core-sdk
-
 [^7]: https://stripe.com/docs/api
-
 [^8]: https://zodiac.wiki/index.php/Introduction:_Zodiac_Standard
-
 [^9]: https://docs.near.org/tools/near-api-js/quick-reference
-
 [^10]: https://docs.ethers.org/v5/
-
 [^11]: https://docs.web3js.org/
