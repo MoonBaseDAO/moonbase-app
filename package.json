@@ -71,6 +71,7 @@
     "eventemitter3": "^5.0.0",
     "formik": "2.2.9",
     "fs": "^0.0.1-security",
+    "intro.js": "^7.0.1",
     "near-api-js": "^1.1.0",
     "next": "13.1.6",
     "nprogress": "0.2.0",
