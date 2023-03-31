@@ -42,8 +42,7 @@ todo - find logos/images for the wares we built this on top of...
 9) - [x] near-api-js[^9]
 10) - [x] ethers[^10]
 11) - [x] web3[^11] 
-![](https://docs.web3js.org/img/web3js.svg)
-<img src="https://docs.web3js.org/img/web3js.svg"  width="60%" height="30%">
+<img src="https://docs.web3js.org/img/web3js.svg"  width="20%" height="20%">
 12) - [ ] your warez?
 as this list continues to grow..
 
