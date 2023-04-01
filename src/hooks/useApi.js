@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
-const BASE_URL = "https://moonbase.up.railway.app/api/";
+const BASE_URL = "https://noco-db-production-30af.up.railway.app/api/";
+
 
 const moonbaseAxios = axios.create({
   baseURL: BASE_URL,
