@@ -19,7 +19,7 @@ export const useGetMessages = () => {
   const getAxios = useCallback(async () => {
     setLoading(true);
     try {
-      const result = await moonbaseAxios.get('v1/db/data/noco/p_srgdu1r1f0optj/Messages/views/Messages', { offset: '0', limit: '25', where: '' });
+  const result = await moonbaseAxios.get('/v1/db/data/noco/p_srgdu1r1f0optj/Messages/views/Messages', { offset: '0', limit: '25', where: '' });
       setLoading(false);
       setData(result.data);
     } catch (err) {
