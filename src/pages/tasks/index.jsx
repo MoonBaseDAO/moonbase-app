@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 // sneaky ninja..
 const TasksPage = () => {
   const { loading, data, getAxios } = useGetTasks();
-  const { postAxios } = usePostTasks();
+  const { postAxios } = usePostTask();
   if (loading) return <h1>Loading</h1>;
     
   const handleTask = async (task) => {
