@@ -5,15 +5,13 @@ import { useGetTasks, usePostTasks } from '@/hooks/useTaskApi';
 import { useEffect } from 'react';
 // sneaky ninja..
 const TasksPage = () => {
-  const { loading, data, getAxios } = useGetTasks();
-  const { postAxios } = usePostTask();
-  if (loading) return <h1>Loading</h1>;
-    
+//  const { loading, data, getAxios } = useGetTasks();
+//  const { postAxios } = usePostTask();
+//  if (loading) return <h1>Loading</h1>;    
 //  const handleTask = async (task) => {
 //    await postAxios(task);
 //    await getAxios();
 //  };
-
   return (
     <>
       <div className="p-5">
