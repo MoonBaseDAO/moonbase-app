@@ -1,7 +1,7 @@
 import { EllipsisVerticalIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import BoardData from "@/mock/task";
+import BoardData from "@/mock/getTask";
 import CardItem from "./card";
 
 const createGuidId = () => {
