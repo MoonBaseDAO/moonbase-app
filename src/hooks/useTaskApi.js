@@ -15,14 +15,14 @@ const moonbaseAxios = axios.create({
 * borrowing messages get/post resquests and modifying it to fit tasks table
 * sneaking in a shoutout to @psyferpunk here btw! ;)
 */
-export const useGetTasks = () => {
+export const useGetTask = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
 
   const getAxios = useCallback(async () => {
     setLoading(true);
     try {
-  const result = await moonbaseAxios.get('/v1/db/data/noco/p_srgdu1r1f0optj/Tasks/views/Tasks', { offset: '0', limit: '25', where: '' });
+  const result = await moonbaseAxios.get('/v1/db/data/noco/p_srgdu1r1f0optj/TaskHacking/views/TaskHacking', { offset: '0', limit: '25', where: '' });
       setLoading(false);
       setData(result.data);
     } catch (err) {
@@ -39,7 +39,7 @@ export const useGetTasks = () => {
 export const usePostTask = () => {
   const postAxios = useCallback(async (data) => {
     try {
-      await moonbaseAxios.post('v1/db/data/noco/p_srgdu1r1f0optj/Tasks/views/Tasks', data);
+      await moonbaseAxios.post('v1/db/data/noco/p_srgdu1r1f0optj/TaskHacking/views/TaskHacking', data);
     } catch (err) {
       console.log("err", err);
     }
